@@ -40,7 +40,7 @@ function install_lr-retro8() {
 function configure_lr-retro8() {
     mkRomDir "pico8"
     ensureSystemretroconfig "pico8"
-    setRetroArchCoreOption "builtin_imageviewer_enable" "false"
+    sed -i '/^#include.*/i builtin_imageviewer_enable = "false"' /opt/retropie/configs/pico8/retroarch.cfg
     addEmulator 1 "$md_id" "pico8" "$md_inst/retro8_libretro.so"
     addSystem "pico8"
 }
