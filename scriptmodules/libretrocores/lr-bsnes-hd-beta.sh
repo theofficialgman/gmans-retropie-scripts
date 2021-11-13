@@ -9,7 +9,7 @@ rp_module_repo="git https://github.com/DerKoun/bsnes-hd.git master"
 rp_module_section="opt"
 rp_module_flags="!armv6"
 
-function depends_lr-bsnes() {
+function depends_lr-bsnes-hd-beta() {
     if compareVersions $__gcc_version lt 7; then
         md_ret_errors+=("You need an OS with gcc 7 or newer to compile $md_id")
         return 1
@@ -19,18 +19,18 @@ function depends_lr-bsnes() {
     getDepends "${depends[@]}"
 }
 
-function sources_lr-bsnes() {
+function sources_lr-bsnes-hd-beta() {
     gitPullOrClone
 }
 
-function build_lr-bsnes() {
+function build_lr-bsnes-hd-beta() {
     local params=(target="libretro" build="release" binary="library")
     make -C bsnes clean "${params[@]}"
     make -C bsnes "${params[@]}"
     md_ret_require="$md_build/bsnes/out/bsnes_hd_beta_libretro.so"
 }
 
-function install_lr-bsnes() {
+function install_lr-bsnes-hd-beta() {
     md_ret_files=(
         'bsnes/out/bsnes_hd_beta_libretro.so'
         'LICENSE'
@@ -38,7 +38,7 @@ function install_lr-bsnes() {
     )
 }
 
-function configure_lr-bsnes() {
+function configure_lr-bsnes-hd-beta() {
     mkRomDir "snes"
     ensureSystemretroconfig "snes"
 
